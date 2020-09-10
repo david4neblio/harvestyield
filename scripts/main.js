@@ -19,11 +19,13 @@ var farmPrice = -1;
 
 function setupProxy(){
 	// To run cross-site javascript request, we will use an open source proxy server
+	/*
 	jQuery.ajaxPrefilter(function(options) {
 	    if (options.crossDomain && jQuery.support.cors) {
 	        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
 	    }
 	});
+	*/
 }
 
 $( document ).ready(function() {
