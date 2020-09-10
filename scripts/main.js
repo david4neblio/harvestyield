@@ -120,9 +120,18 @@ function checkFARMValuesLoaded(){
 		if(isNaN(farm_to_add)){
 			farm_to_add = 0;
 		}
+		var invalid = false;
+		if(totalSupply.lt(farm_in_pool) == true){
+			// Farm in pool must be greater than what you claim is there
+			alert("You've enter an invalid amount of FARM in pool, cannot be larger than pool size.");
+			invalid = true;
+		}
+		if(farm_in_pool < 0 || farm_to_add < 0){
+			invalid = true;
+		}
 		var currentTime = Date.now() / 1000.0; // Get current seconds in UTC
 		var timeDiff = periodFinished.minus(currentTime);
-		if(timeDiff > 0){
+		if(timeDiff > 0 && invalid == false){
 			// This should be true
 			var rewardLeft = rewardRate.multipliedBy(timeDiff); // The reward remaining in FARM
 			var hoursLeft = timeDiff.div(60).div(60).dp(1); // Hours left rounded to 2 decimal places
@@ -143,7 +152,9 @@ function checkFARMValuesLoaded(){
 			$("#result_div").show();
 		}else{
 			$("#result_div").hide();
-			alert("No expected yield on your FARM within the next 24 hours");
+			if(invalid == false){
+				alert("No expected yield on your FARM within the next 24 hours");
+			}			
 		}
 		$("#request_button").html("Refresh");
 		$("#request_button").prop("disabled",false);
