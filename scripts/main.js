@@ -84,12 +84,15 @@ function getFARMPrice(){
 }
 
 function startCalculateYield(){
-	var farm_to_add = $("#farm_to_add").val();
-	var farm_in_pool = $("#farm_in_pool").val();
+	var farm_to_add = parseFloat($("#farm_to_add").val());
+	var farm_in_pool = parseFloat($("#farm_in_pool").val());
 	if(isNaN(farm_in_pool)){
 		return;
 	}
 	if(isNaN(farm_to_add)){
+		return;
+	}
+	if(farm_to_add < 0 || farm_in_pool < 0){
 		return;
 	}
 	$("#request_button").html("Calculating...");
