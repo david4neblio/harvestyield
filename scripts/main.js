@@ -95,6 +95,9 @@ function startCalculateYield(){
 	if(farm_to_add < 0 || farm_in_pool < 0){
 		return;
 	}
+	if(farm_in_pool == 0 && farm_to_add == 0){
+		return;
+	}
 	$("#request_button").html("Calculating...");
 	$("#request_button").prop("disabled",true);
 	$("#farm_to_add").prop("disabled",true);
